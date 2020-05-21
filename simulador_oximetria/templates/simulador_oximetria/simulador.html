@@ -1,0 +1,56 @@
+
+{% extends 'django_sb_admin/sb_admin_dashboard.html' %}
+{% block sb_admin_header_url %}{% endblock sb_admin_header_url %}
+
+{% block sb_admin_header %}Lerdbiomédica{% endblock sb_admin_header %}
+{% block sb_admin_title %} Lerdbiomédica {% endblock sb_admin_title %}
+{% block sb_admin_navbar_right %}{% endblock sb_admin_navbar_right %}
+
+
+{% block sb_admin_breadcrumb_active %}
+{% endblock sb_admin_breadcrumb_active %}
+{% block sb_admin_breadcrumb %}{% endblock sb_admin_breadcrumb %}
+
+{% block sb_admin_sidebar %}
+<li class="nav-item active">
+    <a class="nav-link" href="/revisar/">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Monitorizar paciente</span>
+    </a>
+    <li class="nav-item">
+      <a class="nav-link" href="/simulador">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Simulador de lectura de datos</span></a>
+    </li>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Gestionar paciente</span>
+    </a>
+  </li>
+
+
+{% endblock sb_admin_sidebar %}
+
+
+{% block sb_admin_content %}
+
+<h3>Simulador</h3>
+Nombre: {{ usuarios.nombre }}
+<br>
+Cédula: {{ usuarios.cedula }}
+<br>               
+Oximetría: {{ usuarios.oximetria }}  
+<form  method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Actualizar SpO2" >
+</form>
+
+    
+{% endblock sb_admin_content %}
+
+
+
+{% block sb_admin_copyright %}Derechos reservados © Lerdbiomedica 2020{% endblock sb_admin_copyright %}
+

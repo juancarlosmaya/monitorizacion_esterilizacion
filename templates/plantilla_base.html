@@ -1,0 +1,97 @@
+{% extends "django_sb_admin/base.html" %}
+{% block sb_admin_header_url %}{% endblock sb_admin_header_url %}
+{% block sb_admin_header %}
+
+<a href="{%url 'pagina_inicio'%}">Lerdbiomédica</a>
+
+{% endblock sb_admin_header %}
+{% block sb_admin_title %} Lerdbiomédica {% endblock sb_admin_title %}
+{% block sb_admin_breadcrumb %}{% endblock sb_admin_breadcrumb %}
+{% block sb_admin_navbar_right %}{% endblock sb_admin_navbar_right %}
+
+
+{% block sb_admin_content %}
+<div class="alert alert-secondary alert-dismissable show">
+
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    
+    <i class="fa fa-info-circle"></i>  <strong>Aplicación en Desarrollo</strong> . <code> lerdbiomedica </code> .
+  </div>
+
+  <!--
+    <h2 class="page-header">Telemedicina</h2>
+  -->
+  
+  <p class="lead">
+
+    <details>          
+        <summary>
+            <h4> Telemedicina  </h4>
+            <br>
+            Más del 20% de la mortalidad global es causada por enfermedades respiratorias que se convertirán en la tercera mayor causa de mortalidad.
+            De acuerdo con la  OMS 210 millones de personas vivas están afectadas si no completamente malogradas por EPOC y 300 millones por asma.
+            Aproximadamente el 20% de la población adulta sufre AOS, que representa un factor riesgo severo de mortalidad, ataque y síndrome metabólico (hipertensión, enfermedades cardiovasculares, obesidad, diabetes, etc.).
+
+        </summary>
+        <p>
+            <br>
+            Lerdbiomédica es un líder en dispositivos de diagnóstico y aplicaciones en telemedicina para el análisis de la función respiratoria. Nuestros productos innovadores funcionan como mini laboratorios combinando la oximetría con las pruebas de espirometría, extendiendo así su uso hacia aplicaciones de diagnóstico emergentes.
+MIR es un referente en tecnología por la miniaturización e integración de sus sensores, por el software y por las aplicaciones en telemedicina también aplicados a dispositivos OEM en el campo de la pulmonología.
+            </p>    
+    </details>
+
+  </p>
+  <h5>Uso de la aplicación</h5>
+  <ul>
+    <li><a href="/revisar/">Monitorizar paciente</a> para obtener los valores historicos e instantanios de las variables del paciente </li>
+    <!--
+    <li><a href="/simulador">Simulador</a> para modificar el valor actual de la saturación de oxígeno del paciente </li>
+    -->
+    <li><a href="/admin/">Gestionar paciente</a> para añadir un nuevo paciente</li>
+  </ul>
+{% endblock sb_admin_content %}
+
+
+{% block sb_admin_sidebar %}
+<li class="nav-item active">
+    <a class="nav-link" href="/revisar/">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Monitorizar paciente</span>
+    </a>
+    <!--
+    <li class="nav-item">
+      <a class="nav-link" href="/simulador">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Simulador de lectura de datos</span></a>
+    </li>
+    -->
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Gestionar paciente</span></a>
+    </li>
+  
+  <!--
+  <li class="nav-item dropdown">  
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/" ></a>
+        <a class="nav-link dropdown-toggle" href="/admin/" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+      <i class="fas fa-fw fa-table"></i>
+        <span>Gestionar paciente</span>
+      </a>
+    </li>
+  -->
+</li>
+
+
+{% endblock sb_admin_sidebar %}
+
+
+{% block sb_admin_copyright %}Derechos reservados © Lerdbiomedica 2020{% endblock sb_admin_copyright %}
+
+
+
+
+
+
+
