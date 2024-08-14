@@ -2,8 +2,8 @@
 {% extends 'django_sb_admin/sb_admin_dashboard.html' %}
 {% block sb_admin_header_url %}{% endblock sb_admin_header_url %}
 
-{% block sb_admin_header %}Lerdbiomédica{% endblock sb_admin_header %}
-{% block sb_admin_title %} Lerdbiomédica {% endblock sb_admin_title %}
+{% block sb_admin_header %}Esterilización Remota{% endblock sb_admin_header %}
+{% block sb_admin_title %} Esterilización Remota {% endblock sb_admin_title %}
 {% block sb_admin_navbar_right %}{% endblock sb_admin_navbar_right %}
 
 
@@ -15,7 +15,7 @@
 | <li class="nav-item active">
     <a class="nav-link" href="/revisar/">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Monitorizar paciente</span>
+      <span>Monitorizar esterilizador</span>
     </a>
     <li class="nav-item">
       <a class="nav-link" href="/simulador">
@@ -26,7 +26,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-power-off"></i>
-      <span>Gestionar paciente</span>
+      <span>Gestionar esterilizador</span>
     </a>
   </li>
 
@@ -52,5 +52,5 @@ Oximetría: {{ usuarios.oximetria }}
 
 
 
-{% block sb_admin_copyright %}Derechos reservados © Lerdbiomedica 2020{% endblock sb_admin_copyright %}
+{% block sb_admin_copyright %}Derechos reservados © EsterilizacionRemota 2024{% endblock sb_admin_copyright %}
 

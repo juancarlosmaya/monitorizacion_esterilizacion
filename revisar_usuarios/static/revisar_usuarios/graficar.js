@@ -91,6 +91,7 @@ function miFuncion(){
   
   // valores de saturación y frecuencia cardíaca
   var script_tag=document.getElementById("graficar.js");
+  //const requestURL = 'https://esterilizacionremota.pythonanywhere.com/APIusuario/'+script_tag.getAttribute("one")+'/?format=json';
   const requestURL = 'http://127.0.0.1:8000/APIusuario/'+script_tag.getAttribute("one")+'/?format=json';
   console.log("LEYENDO DATOS DE SERVIDOR");
   const request = new XMLHttpRequest();
