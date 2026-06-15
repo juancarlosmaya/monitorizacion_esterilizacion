@@ -1,11 +1,11 @@
-from django.conf.urls import url
+from django.urls import path
 from .views import simulador
 
 
 urlpatterns = [
    
     # páginas de incio
-    url(r'^$',simulador,name='simulador'), 
+    path('',simulador,name='simulador'), 
     
 
 ]

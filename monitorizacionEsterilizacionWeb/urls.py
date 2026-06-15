@@ -34,30 +34,26 @@ from .views import pagina_inicio
 
 
 # para importar urls de otras aplicaciones
-from django.conf.urls import url,include
-from django.urls import path
+from django.urls import path, include, re_path
 
 urlpatterns = [
     # página de administración
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     
     # páginas de incio
-    url(r'^$',pagina_inicio,name='pagina_inicio'), 
+    path('',pagina_inicio,name='pagina_inicio'), 
     
     # pagina de revisar pacientes
-    url(r'^revisar/', include('revisar_usuarios.urls')),
+    path('revisar/', include('revisar_usuarios.urls')),
 
     # página de gestión de pacientes
-    url(r'^gestion/', include('gestion_usuarios.urls')),
+    path('gestion/', include('gestion_usuarios.urls')),
 
     # página de simulación de uso de lavadora
-    url(r'^simulador/', include('simulador_oximetria.urls')),
+    path('simulador/', include('simulador_oximetria.urls')),
 
-    # prueba de plantilla boostrap dashboard
-    path('django-sb-admin/', include('django_sb_admin.urls')),
-
-    url(r'API', include(router.urls)),
-    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^API', include(router.urls)),
+    #path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

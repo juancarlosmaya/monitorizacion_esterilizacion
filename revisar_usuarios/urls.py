@@ -1,8 +1,7 @@
-
-from django.conf.urls import url
+from django.urls import path
 from .views import revisar_usuarios
 
 urlpatterns = [
-    url(r'^$',revisar_usuarios),
+    path('',revisar_usuarios),
     
 ]

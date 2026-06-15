@@ -1,56 +1,56 @@
 {% extends 'plantilla_base.html' %}
-            {% block content %}
-            
-                <h3>Simulador</h3>
-                Nombre: {{ usuarios.nombre }}
-                <br>
-                Cédula: {{ usuarios.cedula }}
-                <br>               
-                Oximetría: {{ usuarios.oximetria }}  
-                <form  method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="Actualizar SpO2" >
-                </form>
-                <!--
-                <article>
-                                      
-                    
-                    <details>          
-                        <summary>
-                            <h4> RFID technology: Beyond cash-based methods in vending machine</h4>
-                            <br>
-                            This paper characterizes the design, implementation and employment of cashless and secure payment system in vending machine by using radio frequency identification technology, to improve the traditional cash-based payment system that involved lot of problems and risks i.e., hacking, auditing, storing, currency and material of coins and notes. RFID is achieving momentum in a multiple sectors like retail, security, transportation, pharmaceuticals, defense, healthcare etc., and a host of other fields, and now vending machines. 
-                            
-                        </summary>
-                        <p>
-                            <br>
-                            Our proposed methodology consists of passive RFID identification cards and reader for consumers, Arduino Mega microcontroller, SPI protocol for RFID and Arduino interfacing, keypad for password protection, liquid crystal display (LCD) for displaying consumer name and current balance, and SMS is sent for notification using GSM module.
-                            Spiral coil architecture is supported by DC motors powered by relays in mechanical structure of vending machine. It also describes how such product-oriented RFID card based vending machine can maximum facilitates the system engineering.
-                        </p>    
-                    </details>
-                </article>
-                -->
 
-                <!--
-                <article>
-                    
-                    <details>
-                        <summary>
-                            <h4>Electrical Nerve Stimulation for Arthritis Pain</h4>
-                            <br>
-                            If you’ve lived with arthritis for any length of time, your doctor has undoubtedly talked you through a menu of pain-relief options. Medicines you rub on your skin or take by mouth, injections, physical therapy, heat, cold, and acupuncture are just a few of the ways to make your arthritis more bearable. Yet you may still be searching for relief.
-                            Nerve stimulation – or neuromodulation – is an alternative to medication for treating arthritis pain.     
-                        </summary>
-                    
-                        <p>
-                            <br>
-                            It’s the principle of using electricity to decrease pain sensations,” says Robert Bolash, MD, assistant professor of anesthesiology in the department of pain management at the Cleveland Clinic. For some people, neuromodulation treatments can ease pain with minimal risks, he says.
-                            These devices are generally safe. However, they involve sending electrical impulses though your body. So it’s important to talk with your doctor first if you have a pacemaker, another implanted device, are pregnant, have epilepsy, or have a heart problem.
-                        </p>
-                    </details>
-                    
-                </article>
-                
-                -->
+{% block title %}Simulador de Oximetría{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-lg shadow p-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">
+                    <i class="fas fa-vial text-medical-600 mr-2"></i>Simulador de Oximetría
+                </h1>
+                <p class="text-gray-600 mt-2">Actualizar datos de medición</p>
+            </div>
+            <div class="bg-medical-100 rounded-full p-4">
+                <i class="fas fa-microscope text-3xl text-medical-600"></i>
+            </div>
+        </div>
+
+        <!-- Patient Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-8 border-b">
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Nombre</h3>
+                <p class="mt-2 text-lg font-semibold text-gray-900">{{ usuarios.nombre }}</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Cédula</h3>
+                <p class="mt-2 text-lg font-semibold text-gray-900">{{ usuarios.cedula }}</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Oximetría Actual</h3>
+                <p class="mt-2 text-lg font-semibold text-medical-600">{{ usuarios.oximetria }}%</p>
+            </div>
+        </div>
+
+        <!-- Update Form -->
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
             
-            {% endblock %}
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start">
+                <i class="fas fa-info-circle text-blue-600 mr-3 mt-0.5 flex-shrink-0"></i>
+                <p class="text-sm text-blue-800">Haz clic en el botón de abajo para actualizar los datos de SpO2 del paciente.</p>
+            </div>
+
+            <div class="flex gap-4">
+                <button type="submit" class="flex-1 bg-medical-600 hover:bg-medical-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
+                    <i class="fas fa-sync-alt mr-2"></i>Actualizar SpO2
+                </button>
+                <a href="/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,56 +1,64 @@
+{% extends 'plantilla_base.html' %}
+{% block title %}Simulador de Oximetría{% endblock %}
 
-{% extends 'django_sb_admin/sb_admin_dashboard.html' %}
-{% block sb_admin_header_url %}{% endblock sb_admin_header_url %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-lg shadow p-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">
+                    <i class="fas fa-vial text-medical-600 mr-2"></i>Simulador de Oximetría
+                </h1>
+                <p class="text-gray-600 mt-2">Actualizar datos de medición</p>
+            </div>
+            <div class="bg-medical-100 rounded-full p-4">
+                <i class="fas fa-microscope text-3xl text-medical-600"></i>
+            </div>
+        </div>
 
-{% block sb_admin_header %}Esterilización Remota{% endblock sb_admin_header %}
-{% block sb_admin_title %} Esterilización Remota {% endblock sb_admin_title %}
-{% block sb_admin_navbar_right %}{% endblock sb_admin_navbar_right %}
+        <!-- Patient Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-8 border-b">
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Nombre</h3>
+                <p class="mt-2 text-lg font-semibold text-gray-900">{{ usuarios.nombre }}</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Cédula</h3>
+                <p class="mt-2 text-lg font-semibold text-gray-900">{{ usuarios.cedula }}</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Oximetría Actual</h3>
+                <p class="mt-2 text-lg font-semibold text-medical-600">{{ usuarios.oximetria }}%</p>
+            </div>
+        </div>
 
+        <!-- Update Form -->
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start">
+                <i class="fas fa-info-circle text-blue-600 mr-3 mt-0.5 flex-shrink-0"></i>
+                <p class="text-sm text-blue-800">Haz clic en el botón de abajo para actualizar los datos de SpO2 del paciente.</p>
+            </div>
 
-{% block sb_admin_breadcrumb_active %}
-{% endblock sb_admin_breadcrumb_active %}
-{% block sb_admin_breadcrumb %}{% endblock sb_admin_breadcrumb %}
+            <div class="flex gap-4">
+                <button type="submit" class="flex-1 bg-medical-600 hover:bg-medical-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
+                    <i class="fas fa-sync-alt mr-2"></i>Actualizar SpO2
+                </button>
+                <a href="/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver
+                </a>
+            </div>
+        </form>
+    </div>
 
-{% block sb_admin_sidebar %}
-| <li class="nav-item active">
-    <a class="nav-link" href="/revisar/">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Monitorizar esterilizador</span>
-    </a>
-    <li class="nav-item">
-      <a class="nav-link" href="/simulador">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Simulador de lectura de datos</span></a>
-    </li>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <i class="fa fa-power-off"></i>
-      <span>Gestionar esterilizador</span>
-    </a>
-  </li>
-
-
-{% endblock sb_admin_sidebar %}
-
-
-{% block sb_admin_content %}
-
-<h3>Simulador</h3>
-Nombre: {{ usuarios.nombre }}
-<br>
-Cédula: {{ usuarios.cedula }}
-<br>               
-Oximetría: {{ usuarios.oximetria }}  
-<form  method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Actualizar SpO2" >
-</form>
-
-    
-{% endblock sb_admin_content %}
-
-
-
-{% block sb_admin_copyright %}Derechos reservados © EsterilizacionRemota 2024{% endblock sb_admin_copyright %}
+    <!-- Recent Updates -->
+    <div class="mt-8 bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">
+            <i class="fas fa-history mr-2 text-medical-600"></i>Últimas Actualizaciones
+        </h2>
+        <p class="text-gray-600 text-center py-8">No hay actualizaciones disponibles en este momento</p>
+    </div>
+</div>
+{% endblock %}
 

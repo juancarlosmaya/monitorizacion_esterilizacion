@@ -1,38 +1,7 @@
+{% extends 'plantilla_base.html' %}
+{% load static from static %}
 
-{% extends 'django_sb_admin/sb_admin_dashboard.html' %}
-{% load static from static%}
-
-{% block sb_admin_header_url %}{% endblock sb_admin_header_url %}
-
-{% block sb_admin_header %}
-
-<a href="{%url 'pagina_inicio'%}">Esterilización remota</a>
-
-{% endblock sb_admin_header %}
-{% block sb_admin_title %} Esterilización remota {% endblock sb_admin_title %}
-{% block sb_admin_navbar_right %}{% endblock sb_admin_navbar_right %}
-
-
-{% block sb_admin_breadcrumb_active %}
-{% endblock sb_admin_breadcrumb_active %}
-{% block sb_admin_breadcrumb %}{% endblock sb_admin_breadcrumb %}
-
-{% block sb_admin_sidebar %}
-<li class="nav-item active">
-  <a class="nav-link" href="/revisar/">
-    <i class="fas fa-fw fa-tachometer-alt"></i>
-    <span>Monitorizar Esteriizar</span>
-  </a>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Gestionar Esterilizador</span></a>
-  </li>
-
-</li>
-
-
-{% endblock sb_admin_sidebar %}
+{% block title %}Monitorizar Esterilizador{% endblock %}
 
 
 
@@ -40,124 +9,117 @@
 
 
 
-{% block sb_admin_content %}
-
-
-
-
-<h2>Seleccionar esterilizador</h2>
-
-<form method="POST">
-    {% csrf_token %}
-    <select name="nombre_seleccionado">
-    {% for usuario in usuarios %}
-
-        {% ifequal usuario.nombre usuario_seleccionado.nombre %}
-          <option selected="selected"> {{usuario.nombre}} </option>
-        {% endifequal %}
-
-        {% ifnotequal usuario.nombre usuario_seleccionado.nombre %}
-          <option> {{usuario.nombre}} </option>
-        {% endifnotequal %}
-
-    {% endfor %}
-    </select>
-    
-    </br>
-    <button type="submit" value="Submit" class="btn btn-success"> Ver </button>
-</form>
-
-</br>
-
-    
-
-        <!-- Icon Cards-->
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
-                  </div>
-                  <div class="mr-5" id="saturacion_oxigeno">{{usuario_seleccionado.oximetria}}</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">Temperatura Actual</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
+{% block content %}
+<div class="space-y-8">
+    <!-- Selection Form -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Seleccionar Esterilizador</h2>
+        
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label for="nombre_seleccionado" class="block text-sm font-medium text-gray-700 mb-2">Esterilizador</label>
+                <select name="nombre_seleccionado" id="nombre_seleccionado" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-medical-500 focus:border-transparent">
+                    {% for usuario in usuarios %}
+                        {% if usuario.nombre == usuario_seleccionado.nombre %}
+                            <option selected="selected">{{ usuario.nombre }}</option>
+                        {% else %}
+                            <option>{{ usuario.nombre }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
             </div>
             
+            <button type="submit" class="bg-medical-600 hover:bg-medical-500 text-white font-bold py-2 px-4 rounded-md transition-colors">
+                <i class="fas fa-eye mr-2"></i>Ver
+            </button>
+        </form>
+    </div>
 
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-danger o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-life-ring"></i>
-                  </div>
-                  <div  id="frecuencia_cardiaca" class="mr-5" >{{usuario_seleccionado.frecuenciaCardiaca}}</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">Presión Actual</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
+    <!-- Data Cards -->
+    {% if usuario_seleccionado %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Temperature Card -->
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">Temperatura Actual</h3>
+                <i class="fas fa-thermometer-half text-2xl opacity-75"></i>
             </div>
-
-        
- 
-      </div>
-
-
- 
-        <!-- Area Chart Example-->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-chart-area"></i>
-            Temperatura</div>
-          <div class="card-body">
-            <canvas id="graficaSpO2" width="100%" height="30"></canvas>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="text-4xl font-bold" id="saturacion_oxigeno">{{ usuario_seleccionado.oximetria }}</div>
+            <p class="text-blue-100 text-sm mt-2">°C</p>
         </div>
 
-        <small>
-          <h6>Nombre:                         {{usuario_seleccionado.nombre}}</h6>
-          <p>Cédula:                          {{usuario_seleccionado.cedula}}</p>
-          <p>Fecha de nacimiento:             {{usuario_seleccionado.fecha_nacimiento}}</p>
-          <p>Oximetría:                       {{usuario_seleccionado.oximetria}}</p>
-          <p>Frecuencia f cardíaca:             {{usuario_seleccionado.frecuenciaCardiaca}}</p>
-        </small>
-     
+        <!-- Humidity Card -->
+        <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">Humedad</h3>
+                <i class="fas fa-droplets text-2xl opacity-75"></i>
+            </div>
+            <div class="text-4xl font-bold" id="frecuencia_cardiaca">{{ usuario_seleccionado.frecuenciaCardiaca }}</div>
+            <p class="text-red-100 text-sm mt-2">%</p>
+        </div>
 
-<!-- /.row -->
+        <!-- ID Card -->
+        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">Identificador</h3>
+                <i class="fas fa-id-card text-2xl opacity-75"></i>
+            </div>
+            <div class="text-2xl font-bold truncate">{{ usuario_seleccionado.cedula }}</div>
+            <p class="text-green-100 text-sm mt-2">Código único</p>
+        </div>
+    </div>
 
+    <!-- Chart Section -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">
+            <i class="fas fa-chart-line text-medical-600 mr-2"></i>Temperatura
+        </h3>
+        <canvas id="graficaSpO2" class="w-full"></canvas>
+        <p class="text-xs text-gray-500 mt-4">Datos actualizados automáticamente</p>
+    </div>
 
-    
+    <!-- Details Section -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Información Detallada</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Nombre</h3>
+                <p class="mt-2 text-lg text-gray-900">{{ usuario_seleccionado.nombre }}</p>
+            </div>
+            
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Cédula</h3>
+                <p class="mt-2 text-lg text-gray-900">{{ usuario_seleccionado.cedula }}</p>
+            </div>
+            
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Fecha de Nacimiento</h3>
+                <p class="mt-2 text-lg text-gray-900">{{ usuario_seleccionado.fecha_nacimiento }}</p>
+            </div>
+            
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Oximetría</h3>
+                <p class="mt-2 text-lg text-gray-900">{{ usuario_seleccionado.oximetria }}</p>
+            </div>
 
-{% endblock sb_admin_content %}
-
-{% block sb_admin_custom_js %}
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Frecuencia Cardíaca</h3>
+                <p class="mt-2 text-lg text-gray-900">{{ usuario_seleccionado.frecuenciaCardiaca }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
 
 <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
-
 <script id="graficar.js" src="{% static 'revisar_usuarios/graficar.js' %}" one={{usuario_seleccionado.id}}></script>
-
-chart.datasets.label= 'etiqueta';
-
+<script>
+chart.datasets.label = 'etiqueta';
 chart.update();
-
-
-{% endblock sb_admin_custom_js %}
-
-
-
-
-{% block sb_admin_copyright %}Derechos reservados © EstrilizaciónR Remota 2024{% endblock sb_admin_copyright %}
+</script>
 
 
 

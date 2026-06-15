@@ -1,11 +1,10 @@
-
-from django.conf.urls import url
+from django.urls import path
 from .views import solicitar_nombre
 from .views import gracias
 
 urlpatterns = [
-    url(r'^$',solicitar_nombre,name='gestion'),
-    url('gracias',gracias),
+    path('',solicitar_nombre,name='gestion'),
+    path('gracias',gracias),
    
     
 ]
