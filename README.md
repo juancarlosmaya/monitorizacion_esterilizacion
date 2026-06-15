@@ -1,1 +1,1 @@
-"# aplicacionWebOximetria" 
+Aplicacion de monitorización de esterilización
