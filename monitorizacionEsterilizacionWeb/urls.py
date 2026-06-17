@@ -17,9 +17,10 @@ Including another URLconf
 
 # REST API
 from rest_framework import routers
-from .views import vista_examinar_usuario
+from .views import vista_examinar_esterilizador
 router = routers.DefaultRouter()
-router.register('usuario', vista_examinar_usuario)
+router.register('esterilizador', vista_examinar_esterilizador)
+
 
 
 
@@ -44,10 +45,10 @@ urlpatterns = [
     path('',pagina_inicio,name='pagina_inicio'), 
     
     # pagina de revisar pacientes
-    path('revisar/', include('revisar_usuarios.urls')),
+    path('revisar/', include('revisar_esterilizadores.urls')),
 
     # página de gestión de pacientes
-    path('gestion/', include('gestion_usuarios.urls')),
+    path('gestion/', include('gestion_esterilizadores.urls')),
 
     # página de simulación de uso de lavadora
     path('simulador/', include('simulador_oximetria.urls')),

@@ -1,4 +1,4 @@
-from gestion_usuarios.models import usuario
+from gestion_esterilizadores.models import Esterilizador
 
 from django.shortcuts import render
 
@@ -8,11 +8,11 @@ from django.shortcuts import render
 
 def simulador(request):
     if request.method=="POST":
-        usuarios=usuario.objects.get(id=1)
-        usuarios.oximetria=usuarios.oximetria-1
-        usuarios.save()
-        return render(request,'simulador_oximetria/simulador.html',{'usuarios':usuarios})
+        esterilizadores=Esterilizador.objects.get(id=1)
+        esterilizadores.oximetria=esterilizadores.oximetria-1
+        esterilizadores.save()
+        return render(request,'simulador_oximetria/simulador.html',{'esterilizadores':esterilizadores})
     else:
-        usuarios=usuario.objects.get(id=1)
-        return render(request,'simulador_oximetria/simulador.html',{'usuarios':usuarios})
+        esterilizadores=Esterilizador.objects.get(id=1)
+        return render(request,'simulador_oximetria/simulador.html',{'esterilizadores':esterilizadores})
 

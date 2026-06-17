@@ -1,8 +1,8 @@
 # Serializers define the API representation.
-from gestion_usuarios.models import usuario
+from gestion_esterilizadores.models import Esterilizador
 from rest_framework import serializers
-class serializadorUsuario(serializers.ModelSerializer):
+class serializadorEsterilizador(serializers.ModelSerializer):
     class Meta:
-        model = usuario
-        fields = ['nombre', 'cedula', 'fecha_nacimiento', 'frecha_registro','conectado','oximetria','frecuenciaCardiaca','pletismografia','valoresValidos','numeroPicos','balanceIRRDC','fiO2','pip','vt','frecuenciaRespitatoria','presion','volumen','flujo']
+        model = Esterilizador
+        fields = ['tipo', 'modelo', 'serie', 'volumen', 'registro_sanitario','conectado','temperatura_actual','temperatura','presion_actual','presion']
 

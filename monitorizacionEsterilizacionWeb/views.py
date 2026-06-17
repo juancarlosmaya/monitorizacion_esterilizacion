@@ -17,10 +17,10 @@ def pagina_inicio(request):
 
 
 # ViewSets define the view behavior.
-from gestion_usuarios.models import usuario
-from .serializers import serializadorUsuario
+from gestion_esterilizadores.models import Esterilizador
+from .serializers import serializadorEsterilizador
 from rest_framework import viewsets
 
-class vista_examinar_usuario(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
-    serializer_class = serializadorUsuario
+class vista_examinar_esterilizador(viewsets.ModelViewSet):
+    queryset = Esterilizador.objects.all()
+    serializer_class = serializadorEsterilizador

@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'gestion_usuarios',
-    'revisar_usuarios',
+    'gestion_esterilizadores',
+    'revisar_esterilizadores',
     'simulador_oximetria',
     
 ]
