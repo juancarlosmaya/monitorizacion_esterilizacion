@@ -28,7 +28,7 @@ var myLineChart = new Chart(ctx, {
     //labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
     labels: ejeX,
     datasets: [{
-      label: "Pletismografia",
+      label: "Temperatura",
       lineTension: 0.3,
       backgroundColor: "rgba(2,117,216,0.2)",
       borderColor: "rgba(2,117,216,1)",
@@ -92,7 +92,8 @@ function miFuncion(){
   // valores de saturación y frecuencia cardíaca
   var script_tag=document.getElementById("graficar.js");
   //const requestURL = 'https://esterilizacionremota.pythonanywhere.com/APIusuario/'+script_tag.getAttribute("one")+'/?format=json';
-  const requestURL = 'http://127.0.0.1:8000/APIesterilizador/'+script_tag.getAttribute("one")+'/?format=json';
+  const requestURL = 'https://monitorizacionesterilizacion.pythonanywhere.com/APIesterilizador/'+script_tag.getAttribute("one")+'/?format=json';
+  //const requestURL = 'http://127.0.0.1:8000/APIesterilizador/'+script_tag.getAttribute("one")+'/?format=json';
   console.log("LEYENDO DATOS DE SERVIDOR");
   const request = new XMLHttpRequest();
   request.open('GET', requestURL);
