@@ -81,7 +81,7 @@
         <p class="text-xs text-gray-500 mt-4">Datos actualizados automáticamente</p>
     </div>
 
-    <!-- Details Section -->
+    <!-- Details Section
     <div class="bg-white rounded-lg shadow p-6">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Información Detallada</h2>
         
@@ -111,6 +111,7 @@
                 <p class="mt-2 text-lg text-gray-900">{{ esterilizador_seleccionado.frecuenciaCardiaca }}</p>
             </div>
         </div>
+         -->
     </div>
     {% endif %}
 </div>
@@ -121,8 +122,8 @@
 <script id="graficar.js" src="{% static 'revisar_esterilizadores/graficar.js' %}" one={{esterilizador_seleccionado.id}}></script>
 <script>
 console.log("INICIALIZANDO GRÁFICA");
-chart.datasets.label = 'etiqueta';
-chart.update();
+myLineChart.datasets.label = 'etiqueta';
+myLineChart.update();
 </script>
 {% endblock scripts %}
 

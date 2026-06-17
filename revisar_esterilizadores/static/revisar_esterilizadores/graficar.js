@@ -21,28 +21,51 @@ var ejeY=[];
 for (i=0;i<256;i++){
   ejeY[i]=0;
 }
+var ejeY2=[];
+for (i=0;i<256;i++){
+  ejeY2[i]=0;
+}
 var ctx = document.getElementById("graficaSpO2");
 var myLineChart = new Chart(ctx, {
   type: 'line',
-  data: {
-    //labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
-    labels: ejeX,
-    datasets: [{
-      label: "Temperatura",
-      lineTension: 0.3,
-      backgroundColor: "rgba(2,117,216,0.2)",
-      borderColor: "rgba(2,117,216,1)",
-      pointRadius: 5,
-      pointBackgroundColor: "rgba(2,117,216,1)",
-      pointBorderColor: "rgba(255,255,255,0.8)",
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-      pointHitRadius: 50,
-      pointBorderWidth: 2,
-      //data: [900, 0, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
-      data: ejeY,
-      fill: false,
-    }],
+  data: { 
+      labels: ejeX,
+      datasets: [
+      {
+        label: "Temperatura",
+        lineTension: 0.3,
+        backgroundColor: "rgba(2,117,216,0.2)",
+        borderColor: "rgba(2,117,216,1)",
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(2,117,216,1)",
+        pointBorderColor: "rgba(255,255,255,0.8)",
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(2,117,216,1)",
+        pointHitRadius: 50,
+        pointBorderWidth: 2,
+        //data: [900, 0, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+        data: ejeY,
+        fill: false,
+        yAxisID: 'y-axis-1'  // Assign this dataset to the first Y axis
+      },        
+      {
+        label: "Presion (kPa)",
+        lineTension: 0.3,
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(255,99,132,1)",
+        pointBorderColor: "rgba(255,255,255,0.8)",
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(255,99,132,1)",
+        pointHitRadius: 50,
+        pointBorderWidth: 2,
+        //data: [900, 0, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+        data: ejeY2,
+        fill: false,
+        yAxisID: 'y-axis-2'  // Assign this dataset to the second Y axis
+      }
+    ]
   },
   options: {
     animation: {
@@ -64,19 +87,43 @@ var myLineChart = new Chart(ctx, {
           maxTicksLimit: 7
         }
       }],
-      yAxes: [{
-        ticks: {
-          //min: 0,
-          //max: 40000,
-          maxTicksLimit: 5
+        yAxes: [
+        {
+          id: 'y-axis-1',  // First Y axis (for presiones)
+          position: 'left',  // Position it on the right side
+          ticks: {
+            // Adjust the Y axis range for pressure if needed
+            // min: 0, max: 40000,
+            maxTicksLimit: 5
+          },
+          gridLines: {
+            color: "rgba(0, 0, 0, .125)"
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Temperatura (°C)'
+          }
         },
-        gridLines: {
-          color: "rgba(0, 0, 0, .125)",
+        {
+          id: 'y-axis-2',  // Second Y axis (for temperaturas)
+          position: 'right',  // Position it on the right side
+          ticks: {
+            // Adjust the Y axis range for temperature if needed
+            // min: 0, max: 50,
+            maxTicksLimit: 5
+          },
+          gridLines: {
+            color: "rgba(0, 0, 0, .125)"
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Presion (Kpa)'
+          }
         }
-      }],
+      ]
     },
     legend: {
-      display: false
+      display: true
     }
   }
 });
@@ -95,6 +142,7 @@ function miFuncion(){
   const requestURL = 'https://monitorizacionesterilizacion.pythonanywhere.com/APIesterilizador/'+script_tag.getAttribute("one")+'/?format=json';
   //const requestURL = 'http://127.0.0.1:8000/APIesterilizador/'+script_tag.getAttribute("one")+'/?format=json';
   console.log("LEYENDO DATOS DE SERVIDOR");
+  console.log(requestURL);
   const request = new XMLHttpRequest();
   request.open('GET', requestURL);
   console.log(requestURL);
@@ -104,6 +152,11 @@ function miFuncion(){
   request.onload = function() {
     const RESPUESTA = request.response;
     //document.getElementById("frecuencia_cardiaca").textContent=RESPUESTA['frecuenciaCardiaca'];
+    console.log("RESPUESTA DEL SERVIDOR");
+    console.log("la señal de temperatura es")
+    console.log(RESPUESTA['temperatura'].senal)
+    console.log("la temperatura actual es")
+    console.log(RESPUESTA['temperatura_actual'])
     document.getElementById("temperatura_actual").textContent=RESPUESTA['temperatura_actual']+"°C";
     
 
