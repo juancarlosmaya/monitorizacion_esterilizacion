@@ -158,9 +158,10 @@ function miFuncion(){
     console.log("la temperatura actual es")
     console.log(RESPUESTA['temperatura_actual'])
     document.getElementById("temperatura_actual").textContent=RESPUESTA['temperatura_actual']+"°C";
-    
+    document.getElementById("presion_actual").textContent=RESPUESTA['presion_actual']+"kPa";
 
     myLineChart.data.datasets[0].data=RESPUESTA['temperatura'].senal
+    myLineChart.data.datasets[1].data=RESPUESTA['presion'].senal
     // actualización de grafica importando un dato a la vez del array
     /*for (i=0;i<256;i++){senalAnalizarIR[i]=senalAnalizarIR[i+1];}
     senalAnalizarIR[255]=RESPUESTA['pletismografia'].senal[j];
